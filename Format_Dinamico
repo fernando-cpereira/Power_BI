@@ -1,0 +1,14 @@
+// Formatação dinâmica para medidas DAX desenvolvida pelo Alison Pezzott
+VAR _Valor = SELECTEDMEASURE()
+VAR _ValorAbs = ABS(_Valor)
+VAR _Formato = 
+SWITCH(
+     TRUE(),
+     _ValorAbs >= POWER(10,12), "\ #,#0,,,,.0T;\ (#,#0,,,,.0T);",
+     _ValorAbs >= POWER(10,9), "\ #,#0,,,.0B;\ (#,#0,,,.0B);",
+     _ValorAbs >= POWER(10,6), "\ #,#0,,.0M;\ (#,#0,,.0M);",
+     _ValorAbs >= POWER(10,3), "\ #,#0,.0K;\ (#,#0,.0K);",
+     "\ #,#0.00;\ (#,#0.00);"
+ )
+RETURN
+"""" & FORMAT(_Valor, _Formato) & """"
