@@ -1,21 +1,3 @@
-/* 
-**Fórmula de Cálculo de Percentual Acumulado com DAX**
-
-Esta fórmula DAX é utilizada para calcular o percentual acumulado de uma coluna (no exemplo, chamada de 'valor') em relação ao total de valores, enquanto mantém a dinâmica através da função ALLSELECTED().
-
-**Detalhes da Fórmula:**
-
-1. **VAR _total:** Esta variável calcula o total da coluna 'valor' utilizando a função CALCULATE em conjunto com ALLSELECTED(). Isso garante que o cálculo seja dinâmico e leve em consideração os filtros aplicados às visualizações.
-
-2. **VAR _rank:** Aqui, capturamos o valor da coluna 'rank' usando a função SELECTEDVALUE. Isso é útil quando um campo de classificação foi criado anteriormente no SQL e desejamos utilizá-lo no cálculo DAX.
-
-3. **VAR _acum:** Esta variável calcula o percentual acumulado linha a linha da coluna 'valor' em relação ao total calculado em _total. O KEEPFILTERS(table[rank] <= _rank) garante que apenas as linhas com classificação igual ou inferior ao valor em _rank sejam consideradas. A função ALLSELECTED() novamente garante a dinâmica do cálculo.
-
-4. **RETURN:** A fórmula retorna o resultado do percentual acumulado calculado em _acum.
-
-Esta fórmula é especialmente útil quando você deseja calcular o percentual acumulado de uma métrica em relação ao total, mantendo a flexibilidade de filtrar e classificar os dados dinamicamente em ferramentas como o Power BI.
-*\
-
 acumulado_% = 
 -- Aqui vamos calcular o total e colocar "ALLSELECTED()" para tornar dinâminco
 VAR _total =
